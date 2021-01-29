@@ -6,6 +6,26 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurantmenu.db'
 dbsession = DBAccess(SQLAlchemy(app))
 
+@app.route('/')
+@app.route('/restaurants/')
+def restaurants():
+    return render_template('restaurants.html', restaurants=dbsession.getRestaurants())
+
+
+@app.route('/restaurants/new/')
+def newRestaurant():
+    return 'Page for creating new restaurants'
+
+
+@app.route('/restaurants/<int:restaurant_id>/edit')
+def renameRestaurant(restaurant_id):
+    return 'Page for creating new restaurants'
+
+
+@app.route('/restaurants/<int:restaurant_id>/delete')
+def deleteRestaurant(restaurant_id):
+    return 'Page for creating new restaurants'
+
 
 @app.route('/restaurants/<int:restaurant_id>/menu/')
 def restaurantMenu(restaurant_id):
@@ -47,12 +67,12 @@ def deleteMenuItem(restaurant_id, menu_id):
         'deleteMenuItem.html', 
         menuItem=dbsession.getMenuItem(menu_id))
 
-# Making an API endpoint (GET request)
 
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON/')
 def restaurantMenuJSON(restaurant_id):
     items = dbsession.getMenuItems(restaurant_id)
     return jsonify(MenuItems=[i.serialize() for i in items])
+
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/')
 def restaurantMenuItemJSON(restaurant_id, menu_id):
