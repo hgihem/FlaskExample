@@ -17,9 +17,15 @@ def restaurants():
         restaurants=dbsession.getRestaurants())
 
 
-@app.route('/restaurants/new/')
+@app.route('/restaurants/new/',
+           methods=['GET', 'POST'])
 def newRestaurant():
-    return 'Page for creating new restaurants'
+    if request.method == 'POST':
+        dbsession.createNewRestaurant(request.form['name'])
+        flash('"%s" Created!' % request.form['name'])
+        return redirect(url_for('restaurants'))
+    else:
+        return render_template('newRestaurant.html')
 
 
 @app.route('/restaurants/<int:restaurant_id>/edit')
