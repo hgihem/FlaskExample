@@ -28,9 +28,19 @@ def newRestaurant():
         return render_template('newRestaurant.html')
 
 
-@app.route('/restaurants/<int:restaurant_id>/edit')
+@app.route('/restaurants/<int:restaurant_id>/edit',
+           methods=['GET', 'POST'])
 def renameRestaurant(restaurant_id):
-    return 'Page for creating new restaurants'
+    if request.method == 'POST':
+        dbsession.renameRestaurant(
+            restaurantId=restaurant_id,
+            name=request.form['name'])
+        flash('Restaurant %s Renamed!' % request.form['name'])
+        return redirect(url_for('restaurants'))
+    else:
+        return render_template(
+            'editRestaurant.html',
+            restaurant=dbsession.getRestaurant(restaurant_id))
 
 
 @app.route('/restaurants/<int:restaurant_id>/delete')
