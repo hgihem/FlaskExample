@@ -68,15 +68,19 @@ def restaurantMenu(restaurant_id):
            methods=['GET', 'POST'])
 def newMenuItem(restaurant_id):
     if request.method == 'POST':
-        dbsession.createNewMenuItem(restaurant_id, request.form['name'])
-        flash('New menu item created!')
+        dbsession.createNewMenuItem(
+            restaurantId=restaurant_id,
+            name=request.form['name'],
+            price=request.form['price'],
+            description=request.form['description'])
+        flash('%s created!' % request.form['name'])
         return redirect(url_for(
             'restaurantMenu',
             restaurant_id=restaurant_id))
     else:
         return render_template(
             'newMenuItem.html',
-            restaurant_id=restaurant_id)
+            restaurant=dbsession.getRestaurant(restaurant_id))
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/',

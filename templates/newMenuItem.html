@@ -1,10 +1,14 @@
 <html>
     <body>
         <h1>New Menu Item</h1>
-        <form action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}" method="POST">
-            <p>Name:</p>
-            <input type="text" size="30" name="name">
-            <input type="submit" value="Create">
+        <form action="{{url_for('newMenuItem', restaurant_id=restaurant.id)}}" method="POST">
+            <label for="name">Name</label><br>
+            <input type="text" size="30" name="name", value="Name"><br><br>
+            <label for="price">Price($0.99 for example)</label><br>
+            <input type="text" size="30" pattern="\$(0|([1:9]\d*))\.\d{2}" name="price", value="$0.99"><br><br>
+            <label for="description">Description</label><br>
+            <textarea cols=32.5 rows=5 name="description">Description</textarea><br><br>
+            <input type="submit" value="Submit">
         </form>
     </body>
 </html>

@@ -27,10 +27,16 @@ class DBAccess:
         self.db.session.add(newRestaurant)
         self.db.session.commit()
 
-    def createNewMenuItem(self, restaurantId: int, name: str):
+    def createNewMenuItem(self,
+                          restaurantId: int,
+                          name: str,
+                          price: str,
+                          description: str):
         newMenuItem = MenuItem(
             name=name,
-            restaurant_id=self.getRestaurant(restaurantId).id
+            price=price,
+            description=description,
+            restaurant_id=restaurantId,
             )
         self.db.session.add(newMenuItem)
         self.db.session.commit()
