@@ -61,7 +61,7 @@ def restaurantMenu(restaurant_id):
     return render_template(
         'menu.html',
         restaurant=dbsession.getRestaurant(restaurant_id),
-        items=dbsession.getMenuItems(restaurant_id))
+        items=dbsession.getMenuItemsByCourse(restaurant_id))
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/new/',
