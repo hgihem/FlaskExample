@@ -69,7 +69,7 @@ def restaurantMenu(restaurant_id):
 def newMenuItem(restaurant_id):
     if request.method == 'POST':
         dbsession.createNewMenuItem(restaurant_id, request.form['name'])
-        flash("New menu item created!")
+        flash('New menu item created!')
         return redirect(url_for(
             'restaurantMenu',
             restaurant_id=restaurant_id))
@@ -101,7 +101,7 @@ def editMenuItem(restaurant_id, menu_id):
 def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         dbsession.deleteMenuItem(menuId=menu_id)
-        flash("Menu item deleted!")
+        flash('Menu item deleted!')
         return redirect(url_for('restaurantMenu',
                                 restaurant_id=restaurant_id))
     return render_template(
