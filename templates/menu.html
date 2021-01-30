@@ -17,12 +17,12 @@
         {% for (course, dishes) in items %}
         <h2>{{course}}</h2>
             {% for dish in dishes %}
+            <h3>{{dish.name}}</h3>
             <p>
-                {{dish.name}}<br>
                 {{dish.description}}<br>
                 {{dish.price}}<br>
                 <a href={{url_for('editMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>edit</a><br>
-                <a href={{url_for('deleteMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>delete</a><br>
+                <a href={{url_for('deleteMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>delete</a>
             </p>
             {% endfor %}
         {% endfor %}
