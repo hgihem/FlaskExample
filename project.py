@@ -104,8 +104,9 @@ def editMenuItem(restaurant_id, menu_id):
            methods=['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
+        name = dbsession.getMenuItem(menuId=menu_id)
         dbsession.deleteMenuItem(menuId=menu_id)
-        flash('Menu item deleted!')
+        flash(f'{name} deleted!')
         return redirect(url_for('restaurantMenu',
                                 restaurant_id=restaurant_id))
     return render_template(
