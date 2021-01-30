@@ -22,9 +22,9 @@ class DBAccess:
             )
 
     def createNewRestaurant(self, name: str):
-        newRestaurant = Restaurant(
+        new_restaurant = Restaurant(
             name=name)
-        self.db.session.add(newRestaurant)
+        self.db.session.add(new_restaurant)
         self.db.session.commit()
 
     def createNewMenuItem(self,
@@ -32,13 +32,13 @@ class DBAccess:
                           name: str,
                           price: str,
                           description: str):
-        newMenuItem = MenuItem(
+        new_menu_item = MenuItem(
             name=name,
             price=price,
             description=description,
             restaurant_id=restaurantId,
             )
-        self.db.session.add(newMenuItem)
+        self.db.session.add(new_menu_item)
         self.db.session.commit()
 
     def renameRestaurant(self, restaurantId: int, name: str):
