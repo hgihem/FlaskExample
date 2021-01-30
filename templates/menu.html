@@ -14,14 +14,19 @@
             <a href={{url_for('newMenuItem', restaurant_id=restaurant.id)}}>Create new menu item</a><br>
             <a href={{url_for('restaurants')}}>All Restaurants</a><br>
         </p>
-        {% for i in items %}
+        {% for item in items %}
         <p>
-            {{i.name}}<br>
-            {{i.description}}<br>
-            {{i.price}}<br>
-            <a href={{url_for('editMenuItem', menu_id=i.id, restaurant_id=restaurant.id)}}>edit</a><br>
-            <a href={{url_for('deleteMenuItem', menu_id=i.id, restaurant_id=restaurant.id)}}>delete</a><br>
+            {{item.name}}<br>
+            {{item.description}}<br>
+            {{item.price}}<br>
+            <a href={{url_for('editMenuItem', menu_id=item.id, restaurant_id=restaurant.id)}}>edit</a><br>
+            <a href={{url_for('deleteMenuItem', menu_id=item.id, restaurant_id=restaurant.id)}}>delete</a><br>
         </p>
         {% endfor %}
+        {% if not items.first(): %}
+        <p>
+            Restaurant does not yet have any dishes.
+        </p>
+        {% endif %}
     </body>
 </html>
