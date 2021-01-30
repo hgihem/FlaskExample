@@ -1,5 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurantmenu.db'
@@ -12,7 +12,7 @@ class Restaurant(db.Model):
     name = db.Column(db.String(80), nullable=False)
 
     def __repr__(self):
-        return "<Restaurant(\n\tname='%s',\n\tid='%i'\n)>" % (self.name, self.id)
+        return f'<Restaurant(\n\tname=\'{self.name}\',\n\tid=\'{self.id}\'\n)>'
 
 
 class MenuItem(db.Model):
@@ -35,10 +35,9 @@ class MenuItem(db.Model):
         }
 
     def __repr__(self):
-        return "<MenuItem(\n\tname='%s',\n\tid='%i',\n\tcourse='%s',\
-            \n\tdescription='%s',\n\tprice='%s',\n\trestaurant_id='%s'\n)>" % (
-            self.name, self.id, self.course, self.description,
-            self.price, self.restaurant_id)
+        return f'<MenuItem(\n\tname=\'{self.name}\',\n\tid=\'{self.id}\','              \
+            '\n\tcourse=\'{self.course}\',\n\tdescription=\'{self.description}\','      \
+            '\n\tprice=\'{self.price}\',\n\trestaurant_id=\'{self.restaurant_id}\'\n)>'
 
 
 db.create_all()

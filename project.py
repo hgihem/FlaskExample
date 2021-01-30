@@ -22,7 +22,7 @@ def restaurants():
 def newRestaurant():
     if request.method == 'POST':
         dbsession.createNewRestaurant(request.form['name'])
-        flash('"%s" Created!' % request.form['name'])
+        flash(f'"{request.form["name"]}" Created!')
         return redirect(url_for('restaurants'))
     else:
         return render_template('newRestaurant.html')
@@ -35,7 +35,7 @@ def renameRestaurant(restaurant_id):
         dbsession.renameRestaurant(
             restaurantId=restaurant_id,
             name=request.form['name'])
-        flash('Restaurant %s Renamed!' % request.form['name'])
+        flash(f'Restaurant "{request.form["name"]}" Renamed!')
         return redirect(url_for('restaurants'))
     else:
         return render_template(
@@ -49,7 +49,7 @@ def deleteRestaurant(restaurant_id):
     if request.method == 'POST':
         name = dbsession.getRestaurant(restaurant_id).name
         dbsession.deleteRestaurant(restaurant_id)
-        flash('Removed "%s"!' % name)
+        flash(f'Removed "{name}"!')
         return redirect(url_for('restaurants'))
     return render_template(
             'deleteRestaurant.html',
@@ -73,7 +73,7 @@ def newMenuItem(restaurant_id):
             name=request.form['name'],
             price=request.form['price'],
             description=request.form['description'])
-        flash('%s created!' % request.form['name'])
+        flash(f'"{request.form["name"]}" created!')
         return redirect(url_for(
             'restaurantMenu',
             restaurant_id=restaurant_id))
@@ -92,7 +92,7 @@ def editMenuItem(restaurant_id, menu_id):
             name=request.form['name'],
             price=request.form['price'],
             description=request.form['description'])
-        flash('%s updated!' % request.form['name'])
+        flash(f'{request.form["name"]} updated!')
         return redirect(url_for('restaurantMenu',
                                 restaurant_id=restaurant_id))
     return render_template(
@@ -120,7 +120,7 @@ def restaurantMenuJSON(restaurant_id):
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/')
-def restaurantMenuItemJSON(restaurant_id, menu_id):
+def restaurantMenuItemJSON(menu_id):
     menu = dbsession.getMenuItem(menu_id)
     return jsonify(MenuItem=menu.serialize())
 
