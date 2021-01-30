@@ -43,9 +43,17 @@ def renameRestaurant(restaurant_id):
             restaurant=dbsession.getRestaurant(restaurant_id))
 
 
-@app.route('/restaurants/<int:restaurant_id>/delete')
+@app.route('/restaurants/<int:restaurant_id>/delete',
+           methods=['GET', 'POST'])
 def deleteRestaurant(restaurant_id):
-    return 'Page for creating new restaurants'
+    if request.method == 'POST':
+        name = dbsession.getRestaurant(restaurant_id).name
+        dbsession.deleteRestaurant(restaurant_id)
+        flash('Removed "%s"!' % name)
+        return redirect(url_for('restaurants'))
+    return render_template(
+            'deleteRestaurant.html',
+            restaurant=dbsession.getRestaurant(restaurant_id))
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/')
