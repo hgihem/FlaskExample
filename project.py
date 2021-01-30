@@ -85,8 +85,10 @@ def editMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         dbsession.editMenuItem(
             menuId=menu_id,
-            name=request.form['name'])
-        flash("Menu item updated!")
+            name=request.form['name'],
+            price=request.form['price'],
+            description=request.form['description'])
+        flash('%s updated!' % request.form['name'])
         return redirect(url_for('restaurantMenu',
                                 restaurant_id=restaurant_id))
     return render_template(

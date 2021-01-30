@@ -40,9 +40,15 @@ class DBAccess:
         restaurant.name = name
         self.db.session.commit()
 
-    def editMenuItem(self, menuId: int, name: str):
+    def editMenuItem(self,
+                     menuId: int,
+                     name: str,
+                     price: str,
+                     description: str):
         menuItem = self.getMenuItem(menuId=menuId)
         menuItem.name = name
+        menuItem.price = price
+        menuItem.description = description
         self.db.session.commit()
 
     def deleteRestaurant(self, restaurantId: int):

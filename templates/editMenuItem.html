@@ -1,9 +1,14 @@
 <html>
     <body>
-        <h1>Edit Menu Item</h1>
+        <h1>Edit {{menuItem.name}}</h1>
         <form action="{{url_for('editMenuItem', restaurant_id=menuItem.restaurant_id, menu_id=menuItem.id)}}" method="POST">
             <p>Name:</p>
-            <input type="text" size="30" name="name", value="{{menuItem.name}}">
+            <label for="name">Name</label><br>
+            <input type="text" size="30" name="name", value="{{menuItem.name}}"><br><br>
+            <label for="price">Price($0.99 for example)</label><br>
+            <input type="text" size="30" pattern="\$(0|([1:9]\d*))\.\d{2}" name="price", value="{{menuItem.price}}"><br><br>
+            <label for="description">Description</label><br>
+            <textarea cols="30" rows=5 name="description">{{menuItem.description}}</textarea><br><br>
             <input type="submit" value="Submit">
         </form>
         <p>
