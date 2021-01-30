@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from database_setup import Restaurant, MenuItem
+from sqlalchemy import case
+from database_setup import Restaurant, MenuItem, Courses
 
 
 class DBAccess:
@@ -17,19 +18,20 @@ class DBAccess:
         return self.db.session.query(Restaurant).order_by(Restaurant.name)
     
     def getCourses(self, restaurantId: int):
+        sort_order = case(value=MenuItem.course, whens=Courses)
         return self.db.session.query(MenuItem.course).distinct().filter_by(
-            restaurant_id=restaurantId).order_by(MenuItem.course)
+            restaurant_id=restaurantId).order_by(sort_order)
 
     def getMenuItems(self, restaurantId: int):
         return self.db.session.query(MenuItem).filter_by(
             restaurant_id=restaurantId)
 
     def getMenuItemsByCourse(self, restaurantId: int):
-        return {(course[0], self.db.session.query(MenuItem).filter_by(
+        return [(course[0], self.db.session.query(MenuItem).filter_by(
                                 restaurant_id=restaurantId,
                                 course=course[0]))
                 for course
-                in self.getCourses(restaurantId)}
+                in self.getCourses(restaurantId)]
 
     def createNewRestaurant(self, name: str):
         new_restaurant = Restaurant(
