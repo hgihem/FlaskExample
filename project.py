@@ -2,6 +2,7 @@ from flask import (Flask, render_template, request,
                    redirect, url_for, flash, jsonify)
 from flask_sqlalchemy import SQLAlchemy
 from database_access import DBAccess
+from database_setup import Courses
 
 
 app = Flask(__name__)
@@ -72,7 +73,8 @@ def newMenuItem(restaurant_id):
             restaurantId=restaurant_id,
             name=request.form['name'],
             price=request.form['price'],
-            description=request.form['description'])
+            description=request.form['description'],
+            course=request.form['course'])
         flash(f'"{request.form["name"]}" created!')
         return redirect(url_for(
             'restaurantMenu',
@@ -80,7 +82,8 @@ def newMenuItem(restaurant_id):
     else:
         return render_template(
             'newMenuItem.html',
-            restaurant=dbsession.getRestaurant(restaurant_id))
+            restaurant=dbsession.getRestaurant(restaurant_id),
+            courses=Courses)
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/',
@@ -91,13 +94,16 @@ def editMenuItem(restaurant_id, menu_id):
             menuId=menu_id,
             name=request.form['name'],
             price=request.form['price'],
-            description=request.form['description'])
+            description=request.form['description'],
+            course=request.form['course'])
         flash(f'{request.form["name"]} updated!')
         return redirect(url_for('restaurantMenu',
                                 restaurant_id=restaurant_id))
-    return render_template(
-        'editMenuItem.html',
-        menuItem=dbsession.getMenuItem(menu_id))
+    else:
+        return render_template(
+            'editMenuItem.html',
+            menuItem=dbsession.getMenuItem(menu_id),
+            courses=Courses)
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/',

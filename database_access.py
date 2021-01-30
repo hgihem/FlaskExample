@@ -41,14 +41,16 @@ class DBAccess:
 
     def createNewMenuItem(self,
                           restaurantId: int,
-                          name: str,
-                          price: str,
-                          description: str):
+                          name:         str,
+                          price:        str,
+                          description:  str,
+                          course:       str):
         new_menu_item = MenuItem(
             name=name,
             price=price,
             description=description,
             restaurant_id=restaurantId,
+            course=course,
             )
         self.db.session.add(new_menu_item)
         self.db.session.commit()
@@ -59,14 +61,16 @@ class DBAccess:
         self.db.session.commit()
 
     def editMenuItem(self,
-                     menuId: int,
-                     name: str,
-                     price: str,
-                     description: str):
+                     menuId:        int,
+                     name:          str,
+                     price:         str,
+                     description:   str,
+                     course:        str):
         menuItem = self.getMenuItem(menuId=menuId)
         menuItem.name = name
         menuItem.price = price
         menuItem.description = description
+        menuItem.course = course
         self.db.session.commit()
 
     def deleteRestaurant(self, restaurantId: int):

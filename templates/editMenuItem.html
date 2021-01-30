@@ -8,7 +8,16 @@
             <label for="price">Price($0.99 for example)</label><br>
             <input type="text" size="30" name="price", value="{{menuItem.price}}" required pattern="\$(0|([1-9]\d*))\.\d{2}"><br><br>
             <label for="description">Description</label><br>
-            <textarea cols=32.5 rows=5 name="description">{{menuItem.description}}</textarea><br><br>
+            <textarea cols=32.5 rows=5 name="description">{{menuItem.description}}</textarea><br>
+            <p>
+                <div>Course:</div>
+                {% for course in courses %}
+                <div>
+                    <input type="radio" id="{{course}}" name="course" value="{{course}}" {{'checked' if course==menuItem.course else ''}}>
+                    <label for="{{course}}">{{course}}</label>
+                </div>
+                {% endfor %}
+            </p> 
             <input type="submit" value="Submit">
         </form>
         <p>

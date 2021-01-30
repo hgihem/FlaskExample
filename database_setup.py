@@ -40,6 +40,6 @@ class MenuItem(db.Model):
             '\n\tprice=\'{self.price}\',\n\trestaurant_id=\'{self.restaurant_id}\'\n)>'
 
 
-Courses = {'Appetizer': 1, 'Entree': 2, 'Dessert': 3}
+Courses = {'Appetizer': 0, 'Entree': 1, 'Dessert': 2}
 
 db.create_all()
