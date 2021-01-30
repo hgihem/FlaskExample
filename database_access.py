@@ -66,11 +66,11 @@ class DBAccess:
                      price:         str,
                      description:   str,
                      course:        str):
-        menuItem = self.getMenuItem(menuId=menuId)
-        menuItem.name = name
-        menuItem.price = price
-        menuItem.description = description
-        menuItem.course = course
+        menu_item = self.getMenuItem(menuId=menuId)
+        menu_item.name = name
+        menu_item.price = price
+        menu_item.description = description
+        menu_item.course = course
         self.db.session.commit()
 
     def deleteRestaurant(self, restaurantId: int):
