@@ -120,6 +120,12 @@ def deleteMenuItem(restaurant_id, menu_id):
         menuItem=dbsession.getMenuItem(menu_id))
 
 
+@app.route('/restaurants/JSON/')
+def restaurantsJSON():
+    items = dbsession.getRestaurants()
+    return jsonify(Restaurants=[i.serialize() for i in items])
+
+
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON/')
 def restaurantMenuJSON(restaurant_id):
     items = dbsession.getMenuItems(restaurant_id)
