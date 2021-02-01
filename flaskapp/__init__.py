@@ -1,14 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import config
 
-app = Flask(__name__)
-app.config.from_mapping(
-    SECRET_KEY='Super_Secret_Key',
-    SQLALCHEMY_DATABASE_URI='sqlite:///restaurantmenu.db',
-    SQLALCHEMY_TRACK_MODIFICATIONS=False,
-)
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
-from flaskapp.restaurants.views import restaurants
-app.register_blueprint(restaurants, url_prefix='/restaurants')
+
+def create_app(config_env=""):
+    app = Flask(__name__)
+    if not config_env:
+        config_env = app.env
+    app.config.from_object(f'config.{config_env.capitalize()}Config')
+
+    db.init_app(app)
+
+    from flaskapp.restaurants.views import restaurants
+    app.register_blueprint(restaurants, url_prefix='/restaurants')
+    
+    return app

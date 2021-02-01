@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, url_for, jsonify, flash, redirect
-from flaskapp import app
 from flaskapp.database_access import DBAccess
 from flaskapp.models import Courses
 
