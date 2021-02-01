@@ -1,7 +1,7 @@
 <html>
     <body>
         <h1>New Menu Item</h1>
-        <form action="{{url_for('newMenuItem', restaurant_id=restaurant.id)}}" method="POST">
+        <form action="{{url_for('restaurants.newMenuItem', restaurant_id=restaurant.id)}}" method="POST">
             <label for="name">Name</label><br>
             <input type="text" size="30" name="name", value="Name"><br><br>
             <label for="price">Price($0.99 for example)</label><br>
@@ -19,6 +19,6 @@
             </p>    
             <input type="submit" value="Submit">
         </form>
-        <a href = "{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}"> Cancel </a>
+        <a href = "{{ url_for('restaurants.restaurantMenu', restaurant_id=restaurant.id) }}"> Cancel </a>
     </body>
 </html>

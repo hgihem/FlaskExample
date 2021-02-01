@@ -11,8 +11,8 @@
             {% endif %}
         {% endwith %}
         <p>
-            <a href={{url_for('newMenuItem', restaurant_id=restaurant.id)}}>Create new menu item</a><br>
-            <a href={{url_for('restaurants')}}>All Restaurants</a><br>
+            <a href={{url_for('restaurants.newMenuItem', restaurant_id=restaurant.id)}}>Create new menu item</a><br>
+            <a href={{url_for('restaurants.main')}}>All Restaurants</a><br>
         </p>
         {% for (course, dishes) in items %}
         <h2>{{course}}</h2>
@@ -21,8 +21,8 @@
             <p>
                 {{dish.description}}<br>
                 {{dish.price}}<br>
-                <a href={{url_for('editMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>edit</a><br>
-                <a href={{url_for('deleteMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>delete</a>
+                <a href={{url_for('restaurants.editMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>edit</a><br>
+                <a href={{url_for('restaurants.deleteMenuItem', menu_id=dish.id, restaurant_id=restaurant.id)}}>delete</a>
             </p>
             {% endfor %}
         {% endfor %}

@@ -2,10 +2,10 @@
     <body>
     <h1> Are you sure you want to delete {{restaurant.name}}? </h1>
     
-    <form action="{{url_for('deleteRestaurant', restaurant_id=restaurant.id)}}" method = 'post'>
+    <form action="{{url_for('restaurants.deleteRestaurant', restaurant_id=restaurant.id)}}" method = 'post'>
         <input type='submit', value = 'Delete'>
     </form>
     
-    <a href={{url_for('restaurants')}}>Back</a>
+    <a href={{url_for('restaurants.main')}}>Back</a>
     </body>    
 </html>

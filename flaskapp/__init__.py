@@ -10,4 +10,5 @@ app.config.from_mapping(
 
 db = SQLAlchemy(app)
 
-from flaskapp.restaurants import views
+from flaskapp.restaurants.views import restaurants
+app.register_blueprint(restaurants, url_prefix='/restaurants')

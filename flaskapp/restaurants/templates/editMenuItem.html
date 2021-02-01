@@ -1,7 +1,7 @@
 <html>
     <body>
         <h1>Edit {{menuItem.name}}</h1>
-        <form action="{{url_for('editMenuItem', restaurant_id=menuItem.restaurant_id, menu_id=menuItem.id)}}" method="POST">
+        <form action="{{url_for('restaurants.editMenuItem', restaurant_id=menuItem.restaurant_id, menu_id=menuItem.id)}}" method="POST">
             <p>Name:</p>
             <label for="name">Name</label><br>
             <input type="text" size="30" name="name", value="{{menuItem.name}}"><br><br>
@@ -21,7 +21,7 @@
             <input type="submit" value="Submit">
         </form>
         <p>
-            <a href={{url_for('restaurantMenu', restaurant_id=menuItem.restaurant_id)}}>Back</a>
+            <a href={{url_for('restaurants.restaurantMenu', restaurant_id=menuItem.restaurant_id)}}>Back</a>
         </p>
     </body>
 </html>

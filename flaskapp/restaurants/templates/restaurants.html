@@ -11,13 +11,13 @@
             {% endif %}
         {% endwith %}
         <p>
-            <a href={{url_for('newRestaurant')}}>Create new restaurant</a>
+            <a href={{url_for('restaurants.newRestaurant')}}>Create new restaurant</a>
         </p>
         {% for restaurant in restaurants %}
         <p>
-            <h2><a href={{url_for('restaurantMenu', restaurant_id=restaurant.id)}}>{{restaurant.name}}</a></h2>
-            <a href={{url_for('renameRestaurant', restaurant_id=restaurant.id)}}>rename</a><br>
-            <a href={{url_for('deleteRestaurant', restaurant_id=restaurant.id)}}>delete</a><br>
+            <h2><a href={{url_for('restaurants.restaurantMenu', restaurant_id=restaurant.id)}}>{{restaurant.name}}</a></h2>
+            <a href={{url_for('restaurants.renameRestaurant', restaurant_id=restaurant.id)}}>rename</a><br>
+            <a href={{url_for('restaurants.deleteRestaurant', restaurant_id=restaurant.id)}}>delete</a><br>
         </p>
         {% endfor %}
     </body>
