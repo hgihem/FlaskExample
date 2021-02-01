@@ -1,10 +1,4 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurantmenu.db'
-db = SQLAlchemy(app)
-
+from flaskapp import db
 
 class Restaurant(db.Model):
     __tablename__ = 'restaurant'
@@ -47,5 +41,3 @@ class MenuItem(db.Model):
 
 
 Courses = {'Appetizer': 0, 'Entree': 1, 'Dessert': 2}
-
-db.create_all()
