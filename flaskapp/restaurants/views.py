@@ -13,7 +13,7 @@ def main():
         restaurants=DBAccess.getRestaurants())
 
 
-@restaurants.route('/new',
+@restaurants.route('/new/',
            methods=['GET', 'POST'])
 def newRestaurant():
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def newRestaurant():
         return render_template('newRestaurant.html')
 
 
-@restaurants.route('/<int:restaurant_id>/edit',
+@restaurants.route('/<int:restaurant_id>/edit/',
            methods=['GET', 'POST'])
 def renameRestaurant(restaurant_id):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def renameRestaurant(restaurant_id):
             restaurant=DBAccess.getRestaurant(restaurant_id))
 
 
-@restaurants.route('/<int:restaurant_id>/delete',
+@restaurants.route('/<int:restaurant_id>/delete/',
            methods=['GET', 'POST'])
 def deleteRestaurant(restaurant_id):
     if request.method == 'POST':
@@ -115,19 +115,19 @@ def deleteMenuItem(restaurant_id, menu_id):
         menuItem=DBAccess.getMenuItem(menu_id))
 
 
-@restaurants.route('/JSON/')
+@restaurants.route('/json/')
 def restaurantsJSON():
     items = DBAccess.getRestaurants()
     return jsonify(Restaurants=[i.serialize() for i in items])
 
 
-@restaurants.route('/<int:restaurant_id>/menu/JSON/')
+@restaurants.route('/<int:restaurant_id>/menu/json/')
 def restaurantMenuJSON(restaurant_id):
     items = DBAccess.getMenuItems(restaurant_id)
     return jsonify(MenuItems=[i.serialize() for i in items])
 
 
-@restaurants.route('/<int:restaurant_id>/menu/<int:menu_id>/JSON/')
+@restaurants.route('/<int:restaurant_id>/menu/<int:menu_id>/json/')
 def restaurantMenuItemJSON(menu_id):
     menu = DBAccess.getMenuItem(menu_id)
     return jsonify(MenuItem=menu.serialize())
