@@ -29,14 +29,23 @@ def test_empty_db(client):
     assert len(json_data['Restaurants']) == 0
 
 
-def test_a_user_is_able_to_add_a_restaurant(client):
-    restaurant_name = 'Mama Mia\'s😊'
+valid_restaurant_names = [
+    'Silver Gr1ll',
+    '7-Eleven',
+    'Crab Shack',
+    'Joe\'s Burgers'
+    'Mama Mia\'s😊',
+]
+
+
+@pytest.mark.parametrize("restaurant_name", valid_restaurant_names)
+def test_a_user_is_able_to_add_a_restaurant(client, restaurant_name):
     rv = add_restaurant(client, restaurant_name)
     assert unescape(rv.data.decode('utf-8')).count(restaurant_name) == 2
 
 
-def test_a_newly_added_restaurant_is_visibile_in_API(client):
-    restaurant_name = 'Mama Mia\'s😊'
+@pytest.mark.parametrize("restaurant_name", valid_restaurant_names)
+def test_a_newly_added_restaurant_is_visibile_in_API(client, restaurant_name):
     add_restaurant(client, restaurant_name)
     rv = client.get('/restaurants/json/')
     json_data = rv.json
